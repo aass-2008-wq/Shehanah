@@ -1,0 +1,825 @@
+راجعتها سؤالًا سؤالًا، وتجاوزت الخط والإملاء فقط كما طلبت. انسخ الكود واحفظه باسم index.html.
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رحلة شيهانة في لغتي والرياضيات</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+*{
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+}
+body{
+margin:0;
+min-height:100vh;
+background:linear-gradient(135deg,#fff1f2,#ede9fe,#e0f2fe);
+color:#1f2937;
+}
+.app{
+max-width:1150px;
+margin:auto;
+padding:18px;
+}
+.hero{
+background:linear-gradient(135deg,#7c3aed,#ec4899);
+color:white;
+border-radius:30px;
+padding:30px 20px;
+text-align:center;
+box-shadow:0 18px 40px rgba(0,0,0,.18);
+}
+.hero h1{
+margin:0;
+font-size:34px;
+font-weight:900;
+}
+.hero p{
+font-size:20px;
+margin:10px 0 0;
+font-weight:700;
+}
+.panel{
+background:rgba(255,255,255,.93);
+border-radius:28px;
+padding:22px;
+margin-top:18px;
+box-shadow:0 16px 36px rgba(0,0,0,.10);
+}
+.hidden{
+display:none;
+}
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:16px;
+}
+.menu button,
+.btn{
+border:0;
+border-radius:20px;
+padding:18px;
+cursor:pointer;
+font-weight:900;
+font-size:20px;
+color:white;
+box-shadow:0 10px 24px rgba(0,0,0,.16);
+}
+.mathBtn{
+background:linear-gradient(135deg,#0284c7,#38bdf8);
+}
+.arabicBtn{
+background:linear-gradient(135deg,#16a34a,#86efac);
+}
+.allBtn{
+background:linear-gradient(135deg,#9333ea,#f472b6);
+}
+.darkBtn{
+background:#111827;
+}
+.top{
+display:flex;
+gap:10px;
+align-items:center;
+flex-wrap:wrap;
+margin-bottom:16px;
+}
+.tag{
+padding:9px 16px;
+border-radius:999px;
+color:white;
+font-weight:900;
+}
+.progressBox{
+flex:1;
+min-width:180px;
+height:18px;
+background:#e5e7eb;
+border-radius:99px;
+overflow:hidden;
+}
+.progress{
+height:100%;
+width:0;
+background:linear-gradient(90deg,#facc15,#ec4899);
+transition:.3s;
+}
+.card{
+background:white;
+border:2px solid #f3e8ff;
+border-radius:24px;
+padding:22px;
+}
+.qno{
+color:#6b7280;
+font-weight:900;
+margin-bottom:8px;
+}
+.visual{
+background:#f8fafc;
+border:2px dashed #d8b4fe;
+border-radius:18px;
+padding:14px;
+margin:12px 0;
+text-align:center;
+font-weight:800;
+font-size:18px;
+}
+.question{
+font-size:24px;
+font-weight:900;
+line-height:1.8;
+}
+.options{
+display:grid;
+gap:10px;
+margin-top:18px;
+}
+.option{
+border:2px solid #e9d5ff;
+background:#faf5ff;
+border-radius:17px;
+padding:14px;
+font-size:19px;
+font-weight:800;
+text-align:right;
+cursor:pointer;
+transition:.2s;
+}
+.option:hover{
+transform:scale(1.01);
+background:#f3e8ff;
+}
+.correct{
+background:#dcfce7!important;
+border-color:#22c55e!important;
+color:#166534;
+}
+.wrong{
+background:#fee2e2!important;
+border-color:#ef4444!important;
+color:#991b1b;
+}
+.feedback{
+display:none;
+margin-top:14px;
+padding:13px;
+border-radius:16px;
+font-size:19px;
+font-weight:900;
+}
+.good{
+display:block;
+background:#dcfce7;
+color:#166534;
+}
+.bad{
+display:block;
+background:#fee2e2;
+color:#991b1b;
+}
+.next{
+display:none;
+margin-top:14px;
+background:linear-gradient(135deg,#7c3aed,#ec4899);
+}
+.result{
+text-align:center;
+}
+.big{
+font-size:44px;
+font-weight:900;
+color:#ec4899;
+}
+.medal{
+font-size:54px;
+}
+.review{
+text-align:right;
+display:grid;
+gap:10px;
+margin-top:18px;
+}
+.rev{
+background:#f9fafb;
+border-radius:15px;
+padding:12px;
+border-right:7px solid #ddd;
+line-height:1.8;
+}
+.rev.ok{
+border-right-color:#22c55e;
+}
+.rev.no{
+border-right-color:#ef4444;
+}
+.footer{
+text-align:center;
+color:#6b7280;
+font-weight:800;
+margin:22px;
+}
+.clock{
+width:90px;
+height:90px;
+border:6px solid #facc15;
+border-radius:50%;
+margin:auto;
+background:white;
+position:relative;
+}
+.hand{
+position:absolute;
+width:4px;
+left:43px;
+top:15px;
+transform-origin:bottom;
+border-radius:5px;
+}
+.minute{
+height:35px;
+background:#0f172a;
+}
+.hour{
+height:28px;
+background:#ef4444;
+top:22px;
+}
+.mEight{
+transform:rotate(0deg);
+}
+.hEight{
+transform:rotate(240deg);
+}
+.mTwoHalf{
+transform:rotate(180deg);
+}
+.hTwoHalf{
+transform:rotate(75deg);
+}
+.money span{
+display:inline-block;
+background:#dcfce7;
+border:2px solid #16a34a;
+border-radius:8px;
+padding:8px 12px;
+margin:4px;
+}
+.fracCircle{
+width:100px;
+height:100px;
+border-radius:50%;
+margin:auto;
+background:conic-gradient(#38bdf8 0 216deg,#fff 216deg 360deg);
+border:3px solid #334155;
+}
+.shapeBox{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:35px;
+}
+.bigShape{
+width:150px;
+height:70px;
+background:#fb7185;
+clip-path:polygon(18% 0,82% 0,100% 100%,0 100%);
+}
+.smallShape{
+width:70px;
+height:35px;
+background:#fb7185;
+clip-path:polygon(18% 0,82% 0,100% 100%,0 100%);
+}
+@media(max-width:600px){
+.hero h1{font-size:25px}
+.hero p{font-size:17px}
+.question{font-size:20px}
+.option{font-size:17px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="hero">
+<h1>🌟 رحلة شيهانة في لغتي والرياضيات 🌟</h1>
+<p>صُنع بكل حب إلى ابنتي شيهانة 💖</p>
+</section>
+<section id="home" class="panel">
+<h2 style="text-align:center;margin-top:0">اختاري الاختبار يا شيهانة 👧🏻</h2>
+<div class="menu">
+<button class="mathBtn" onclick="startQuiz('رياضيات')">🧮 اختبار الرياضيات</button>
+<button class="arabicBtn" onclick="startQuiz('لغتي')">📘 اختبار لغتي</button>
+<button class="allBtn" onclick="startQuiz('الكل')">🌈 اختبار شامل</button>
+</div>
+</section>
+<section id="quizPanel" class="panel hidden">
+<div class="top">
+<button class="btn darkBtn" onclick="goHome()">الرئيسية</button>
+<div id="tag" class="tag"></div>
+<div class="progressBox">
+<div id="progress" class="progress"></div>
+</div>
+</div>
+<div class="card">
+<div id="qno" class="qno"></div>
+<div id="visual"></div>
+<div id="question" class="question"></div>
+<div id="options" class="options"></div>
+<div id="feedback" class="feedback"></div>
+<button id="nextBtn" class="btn next" onclick="nextQuestion()">السؤال التالي ✨</button>
+</div>
+</section>
+<section id="resultPanel" class="panel result hidden">
+<h2>أحسنتِ يا شيهانة 🌷</h2>
+<div id="medal" class="medal"></div>
+<div id="scoreBig" class="big"></div>
+<p id="resultMsg"></p>
+<button class="btn darkBtn" onclick="goHome()">العودة للرئيسية</button>
+<button class="btn allBtn" onclick="restartSame()">إعادة الاختبار</button>
+<div id="review" class="review"></div>
+</section>
+<div class="footer">
+برمجة وتنفيذ والد شيهانة — صنع بكل حب 💗
+</div>
+</div>
+<script>
+const questions = [
+{
+subject:"رياضيات",
+visual:'<div class="visual money">النقود في السؤال: <span>٥٠</span><span>٥</span><span>٥</span><span>١</span><span>١</span></div>',
+q:"أعدّ ثم أكتب السعر في البطاقة:",
+options:["٥٥ ريال","٦٠ ريال","٦٢ ريال","٦٥ ريال"],
+answer:"٦٢ ريال"
+},
+{
+subject:"رياضيات",
+visual:'<div class="visual"><div class="clock"><div class="hand minute mEight"></div><div class="hand hour hEight"></div></div></div>',
+q:"أكتب الوقت الذي تشير إليه الساعة:",
+options:["٨","٦","١٢","٣"],
+answer:"٨"
+},
+{
+subject:"رياضيات",
+visual:'<div class="visual"><div class="clock"><div class="hand minute mTwoHalf"></div><div class="hand hour hTwoHalf"></div></div></div>',
+q:"أكتب الوقت الذي تشير إليه الساعة:",
+options:["الثانية والنصف","الثالثة","السادسة","الثامنة"],
+answer:"الثانية والنصف"
+},
+{
+subject:"رياضيات",
+visual:'<div class="visual"><div class="fracCircle"></div></div>',
+q:"أكتب الكسر الدال على الجزء الملوّن:",
+options:["١/٥","٢/٥","٣/٥","٤/٥"],
+answer:"٣/٥"
+},
+{
+subject:"رياضيات",
+q:"ألوّن الأجزاء التي تمثل الكسر المكتوب ٢/٤. كم جزءًا ألوّن؟",
+options:["جزء واحد","جزآن","ثلاثة أجزاء","أربعة أجزاء"],
+answer:"جزآن"
+},
+{
+subject:"رياضيات",
+q:"أقارن بين الكسرين: ١/٤ و ١/٦",
+options:["١/٤ > ١/٦","١/٤ < ١/٦","١/٤ = ١/٦","لا يمكن المقارنة"],
+answer:"١/٤ > ١/٦"
+},
+{
+subject:"رياضيات",
+q:"أقارن بين الكسرين: ١/٣ و ١/٢",
+options:["١/٣ > ١/٢","١/٣ < ١/٢","١/٣ = ١/٢","لا يمكن المقارنة"],
+answer:"١/٣ < ١/٢"
+},
+{
+subject:"رياضيات",
+q:"أملأ جدول المنازل وأكتب العدد: ٣ مئات، ٨ عشرات، ٢ آحاد.",
+options:["٢٣٨","٣٢٨","٣٨٢","٨٣٢"],
+answer:"٣٨٢"
+},
+{
+subject:"رياضيات",
+q:"أكتب العدد: ٦٠٠ + ٣٠ + ٨ =",
+options:["٦٣٨","٦٨٣","٣٦٨","٨٣٦"],
+answer:"٦٣٨"
+},
+{
+subject:"رياضيات",
+q:"أكتب العدد بالأرقام: ثمانية وثلاثون.",
+options:["٨٣","٣٨","٣٠٨","٨٠٣"],
+answer:"٣٨"
+},
+{
+subject:"رياضيات",
+q:"أقارن بين العددين: ١٢٤ و ١٤٢",
+options:["١٢٤ < ١٤٢","١٢٤ > ١٤٢","١٢٤ = ١٤٢","لا يوجد"],
+answer:"١٢٤ < ١٤٢"
+},
+{
+subject:"رياضيات",
+q:"أقارن بين العددين: ٢٥٣ و ٢٥٧",
+options:["٢٥٣ < ٢٥٧","٢٥٣ > ٢٥٧","٢٥٣ = ٢٥٧","لا يوجد"],
+answer:"٢٥٣ < ٢٥٧"
+},
+{
+subject:"رياضيات",
+q:"أقارن بين العددين: ٣١٣ و ٣١٣",
+options:["٣١٣ < ٣١٣","٣١٣ > ٣١٣","٣١٣ = ٣١٣","لا يوجد"],
+answer:"٣١٣ = ٣١٣"
+},
+{
+subject:"رياضيات",
+q:"أرتب الأعداد من الأصغر إلى الأكبر: ٨٠١، ٨٠٥، ٧٩٨",
+options:["٧٩٨، ٨٠١، ٨٠٥","٨٠٥، ٨٠١، ٧٩٨","٨٠١، ٧٩٨، ٨٠٥","٧٩٨، ٨٠٥، ٨٠١"],
+answer:"٧٩٨، ٨٠١، ٨٠٥"
+},
+{
+subject:"رياضيات",
+q:"أكتشف النمط: ٣١٢، ٣١٣، ٣١٤، ___، ٣١٦",
+options:["٣١٠","٣١١","٣١٥","٣١٧"],
+answer:"٣١٥"
+},
+{
+subject:"رياضيات",
+q:"النمط هو: كل عدد يزيد عن السابق له بمقدار:",
+options:["١","٢","٥","١٠"],
+answer:"١"
+},
+{
+subject:"رياضيات",
+q:"أكتب اسم المجسم:",
+options:["مكعب","كرة","أسطوانة","مخروط"],
+answer:"مكعب"
+},
+{
+subject:"رياضيات",
+q:"أكتب عدد أضلاع الشكل السداسي:",
+options:["٤","٥","٦","٧"],
+answer:"٦"
+},
+{
+subject:"رياضيات",
+q:"أكتب عدد رؤوس الشكل السداسي:",
+options:["٤","٥","٦","٨"],
+answer:"٦"
+},
+{
+subject:"رياضيات",
+visual:'<div class="visual shapeBox"><div class="bigShape"></div><div class="smallShape"></div></div>',
+q:"أحوط الشكل الذي مساحته أكبر:",
+options:["الشكل الكبير","الشكل الصغير","متساويان","لا يوجد"],
+answer:"الشكل الكبير"
+},
+{
+subject:"رياضيات",
+q:"أحوط الوحدة المناسبة لقياس السعة:",
+options:["لتر","ملليلتر","متر","كيلوجرام"],
+answer:"ملليلتر"
+},
+{
+subject:"رياضيات",
+q:"أجد ناتج الجمع: ٤٠٠ + ٣٠٠",
+options:["٥٠٠","٦٠٠","٧٠٠","٨٠٠"],
+answer:"٧٠٠"
+},
+{
+subject:"رياضيات",
+q:"أجد ناتج الجمع: ٢٤٣ + ٢١٩",
+options:["٤٥٢","٤٦٢","٤٧٢","٤٨٢"],
+answer:"٤٦٢"
+},
+{
+subject:"رياضيات",
+q:"أجد ناتج الطرح: ٦٤٠ - ٥٠",
+options:["٥٨٠","٥٩٠","٦٠٠","٦٩٠"],
+answer:"٥٩٠"
+},
+{
+subject:"لغتي",
+visual:"النص: الرسول ﷺ قدوتي في العفو والتسامح",
+q:"معنى كلمة (تشاجرت):",
+options:["تصالحت","تخاصمت","تناقشت","تعاونت"],
+answer:"تخاصمت"
+},
+{
+subject:"لغتي",
+q:"ضد كلمة (جُبن):",
+options:["شجاعة","خوف","قلق","توتر"],
+answer:"شجاعة"
+},
+{
+subject:"لغتي",
+q:"يتحدث النص عن:",
+options:["الخوف","الغضب","التسامح","القدوة"],
+answer:"التسامح"
+},
+{
+subject:"لغتي",
+q:"كيف دخل فواز المنزل؟",
+options:["سعيدًا","حزينًا","خائفًا","غاضبًا"],
+answer:"غاضبًا"
+},
+{
+subject:"لغتي",
+q:"مع من تشاجر فواز؟",
+options:["بعض الأولاد","عادل","جاره","تامر"],
+answer:"بعض الأولاد"
+},
+{
+subject:"لغتي",
+q:"ما موقف عادل من المشاجرة؟",
+options:["عاد لمنزله","أكمل طريقه","أكمل اللعب","فصل بينهم"],
+answer:"فصل بينهم"
+},
+{
+subject:"لغتي",
+q:"ماذا قال الوالد عن موقف عادل؟",
+options:["أساء عادل","خيرًا فعل عادل","أخطأ عادل","لم يتدخل عادل"],
+answer:"خيرًا فعل عادل"
+},
+{
+subject:"لغتي",
+q:"ما المثال الذي أعطاه الوالد لفواز؟",
+options:["عفو وتسامح الرسول ﷺ","عفو وتسامح عادل","عفو وتسامح الجار","عفو وتسامح الأولاد"],
+answer:"عفو وتسامح الرسول ﷺ"
+},
+{
+subject:"لغتي",
+q:"كيف عامل أهل مكة الرسول صلى الله عليه وسلم؟",
+options:["بالصدق","بالعفو والتسامح","بالصبر","بالشجاعة"],
+answer:"بالعفو والتسامح"
+},
+{
+subject:"لغتي",
+q:"ماذا فعل الرسول صلى الله عليه وسلم مع أهل مكة الذين آذوه؟",
+options:["انتقم منهم","ساعدهم","عفا عنهم","غضب منهم"],
+answer:"عفا عنهم"
+},
+{
+subject:"لغتي",
+q:"بم وعد فواز أباه؟",
+options:["أن يقتدي بالرسول ﷺ","أن يقتدي بالمعلم","أن يقتدي بالجار","أن يقتدي بالوالد"],
+answer:"أن يقتدي بالرسول ﷺ"
+},
+{
+subject:"لغتي",
+q:"من قدوة فواز في العفو والتسامح؟",
+options:["المعلم","عادل","الرسول ﷺ","الجار"],
+answer:"الرسول ﷺ"
+},
+{
+subject:"لغتي",
+q:"رتب الجمل التالية: خرجت سيارة ذات يوم تتجول في طريق بري / فرأت جملًا حزينًا يقف إلى جانب الطريق / توقفت السيارة وسألته / مالي أراك حزينًا أيها الجمل؟",
+options:[
+"خرجت سيارة ذات يوم تتجول في طريق بري، فرأت جملًا حزينًا يقف إلى جانب الطريق، توقفت السيارة وسألته: مالي أراك حزينًا أيها الجمل؟",
+"توقفت السيارة وسألته، خرجت سيارة ذات يوم تتجول في طريق بري، مالي أراك حزينًا أيها الجمل؟، فرأت جملًا حزينًا",
+"مالي أراك حزينًا أيها الجمل؟، خرجت سيارة ذات يوم، توقفت السيارة، فرأت جملًا",
+"فرأت جملًا حزينًا، مالي أراك حزينًا، خرجت سيارة، توقفت السيارة"
+],
+answer:"خرجت سيارة ذات يوم تتجول في طريق بري، فرأت جملًا حزينًا يقف إلى جانب الطريق، توقفت السيارة وسألته: مالي أراك حزينًا أيها الجمل؟"
+},
+{
+subject:"لغتي",
+q:"نوع الأسلوب في: إن الفكرة جميلة.",
+options:["أسلوب دعاء","أسلوب استثناء","أسلوب توكيد","أسلوب نفي"],
+answer:"أسلوب توكيد"
+},
+{
+subject:"لغتي",
+q:"كلمة (الزائرات):",
+options:["همزة قطع","همزة وصل","همزة متوسطة","ألف مقصورة"],
+answer:"همزة متوسطة"
+},
+{
+subject:"لغتي",
+q:"نوع الأسلوب في: اجتمع الأصدقاء إلا فهد.",
+options:["أسلوب استثناء","ظرف زمان","أسلوب نهي","الأسماء الخمسة"],
+answer:"أسلوب استثناء"
+},
+{
+subject:"لغتي",
+q:"نوع كلمة (بعد) في: لعبت بالألعاب بعد مذاكرة دروسي.",
+options:["ظرف زمان","ألف مقصورة","ظرف مكان","همزة وصل"],
+answer:"ظرف زمان"
+},
+{
+subject:"لغتي",
+q:"نوع الأسلوب في: اللهم أسعد أمي.",
+options:["أسلوب توكيد","أسلوب دعاء","أسلوب تمني","أسلوب نهي"],
+answer:"أسلوب دعاء"
+},
+{
+subject:"لغتي",
+q:"مفرد كلمة (تلميذات):",
+options:["تلميذة","تلميذتان","تلميذه","تلميذان"],
+answer:"تلميذة"
+},
+{
+subject:"لغتي",
+q:"كلمة فيها همزة وصل:",
+options:["اشترى","أعدك","ألوان","أمر"],
+answer:"اشترى"
+},
+{
+subject:"لغتي",
+q:"نوع الأسلوب في: ليتني مضيئة كالقمر.",
+options:["أسلوب توكيد","أسلوب استثناء","أسلوب دعاء","أسلوب تمني"],
+answer:"أسلوب تمني"
+},
+{
+subject:"لغتي",
+q:"جملة فيها أسلوب النهي:",
+options:["لا تكتب على الحائط","أخوك يساعد المحتاج","لعب الأولاد إلا سعد","القلم فوق الطاولة"],
+answer:"لا تكتب على الحائط"
+},
+{
+subject:"لغتي",
+q:"خالد كسر زجاج ........",
+options:["النافذة","النافذت","لنافذة","النافداه"],
+answer:"النافذة"
+},
+{
+subject:"لغتي",
+q:"صنف كلمة (هذا):",
+options:["اسم إشارة","الأسماء الخمسة","ظرف مكان","ألف مقصورة"],
+answer:"اسم إشارة"
+},
+{
+subject:"لغتي",
+q:"صنف كلمة (أخوك):",
+options:["اسم إشارة","الأسماء الخمسة","ظرف مكان","همزة قطع"],
+answer:"الأسماء الخمسة"
+},
+{
+subject:"لغتي",
+q:"صنف كلمة (فوق):",
+options:["اسم إشارة","الأسماء الخمسة","ظرف مكان","ألف مقصورة"],
+answer:"ظرف مكان"
+},
+{
+subject:"لغتي",
+q:"صنف كلمة (ألقى):",
+options:["ألف مقصورة","همزة وصل","ظرف مكان","اسم إشارة"],
+answer:"ألف مقصورة"
+},
+{
+subject:"لغتي",
+q:"صنف كلمة (أشكال):",
+options:["همزة قطع","همزة وصل","ظرف مكان","الأسماء الخمسة"],
+answer:"همزة قطع"
+},
+{
+subject:"لغتي",
+q:"رتب الكلمات لتكون جملة: قدوتي / الصدق / الرسول / في",
+options:[
+"الرسول قدوتي في الصدق",
+"في الصدق الرسول قدوتي",
+"الصدق في الرسول قدوتي",
+"قدوتي في الرسول الصدق"
+],
+answer:"الرسول قدوتي في الصدق"
+},
+{
+subject:"لغتي",
+q:"أكمل: قال المعلم: لقد تحدث الجميع إلا أنت يا حازم فماذا تحب أن تكون ....",
+options:["؟","!","،","."],
+answer:"؟"
+},
+{
+subject:"لغتي",
+q:"أكمل: غابت ........ عن المدرسة.",
+options:["وفاءُ","وفاءَ","وفاءِ","وفاءْ"],
+answer:"وفاءُ"
+}
+];
+let selected = [];
+let current = 0;
+let score = 0;
+let answers = [];
+let mode = "الكل";
+let locked = false;
+const home = document.getElementById("home");
+const quizPanel = document.getElementById("quizPanel");
+const resultPanel = document.getElementById("resultPanel");
+const tag = document.getElementById("tag");
+const progress = document.getElementById("progress");
+const qno = document.getElementById("qno");
+const visual = document.getElementById("visual");
+const question = document.getElementById("question");
+const options = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+function startQuiz(m){
+mode = m;
+current = 0;
+score = 0;
+answers = [];
+locked = false;
+if(m === "الكل"){
+selected = [...questions];
+}else{
+selected = questions.filter(x => x.subject === m);
+}
+home.classList.add("hidden");
+resultPanel.classList.add("hidden");
+quizPanel.classList.remove("hidden");
+showQuestion();
+}
+function showQuestion(){
+locked = false;
+feedback.className = "feedback";
+feedback.innerHTML = "";
+nextBtn.style.display = "none";
+let item = selected[current];
+tag.textContent = item.subject;
+tag.style.background = item.subject === "رياضيات" ? "#0ea5e9" : "#22c55e";
+qno.textContent = `السؤال ${current + 1} من ${selected.length}`;
+visual.innerHTML = item.visual || "";
+question.textContent = item.q;
+progress.style.width = (current / selected.length * 100) + "%";
+options.innerHTML = "";
+item.options.forEach(op => {
+let b = document.createElement("button");
+b.className = "option";
+b.textContent = op;
+b.onclick = () => check(b, op);
+options.appendChild(b);
+});
+}
+function check(btn, chosen){
+if(locked) return;
+locked = true;
+let item = selected[current];
+document.querySelectorAll(".option").forEach(b => {
+b.disabled = true;
+if(b.textContent === item.answer){
+b.classList.add("correct");
+}
+});
+let ok = chosen === item.answer;
+if(ok){
+score++;
+feedback.className = "feedback good";
+feedback.innerHTML = "إجابة صحيحة يا شيهانة ⭐";
+}else{
+btn.classList.add("wrong");
+feedback.className = "feedback bad";
+feedback.innerHTML = "إجابة غير صحيحة 🌷 الصحيح: " + item.answer;
+}
+answers.push({
+subject:item.subject,
+q:item.q,
+chosen:chosen,
+correct:item.answer,
+ok:ok
+});
+nextBtn.style.display = "inline-block";
+}
+function nextQuestion(){
+current++;
+if(current >= selected.length){
+finishQuiz();
+}else{
+showQuestion();
+}
+}
+function finishQuiz(){
+quizPanel.classList.add("hidden");
+resultPanel.classList.remove("hidden");
+let percent = Math.round(score / selected.length * 100);
+document.getElementById("scoreBig").textContent = score + " / " + selected.length;
+if(percent >= 90){
+document.getElementById("medal").textContent = "🏆👑✨";
+document.getElementById("resultMsg").textContent = "ممتازة يا شيهانة! النسبة: " + percent + "%";
+}else if(percent >= 75){
+document.getElementById("medal").textContent = "🥇⭐";
+document.getElementById("resultMsg").textContent = "رائعة جدًا يا شيهانة! النسبة: " + percent + "%";
+}else if(percent >= 50){
+document.getElementById("medal").textContent = "🌷⭐";
+document.getElementById("resultMsg").textContent = "أحسنتِ ومع المراجعة تصبحين أفضل. النسبة: " + percent + "%";
+}else{
+document.getElementById("medal").textContent = "💗🌱";
+document.getElementById("resultMsg").textContent = "لا بأس، نعيد التدريب وننجح بإذن الله. النسبة: " + percent + "%";
+}
+let review = document.getElementById("review");
+review.innerHTML = "<h3>مراجعة الإجابات</h3>";
+answers.forEach((a, i) => {
+let d = document.createElement("div");
+d.className = "rev " + (a.ok ? "ok" : "no");
+d.innerHTML = `<b>${i + 1}- ${a.subject}</b><br>${a.q}<br>إجابتك: ${a.chosen}<br>الصحيح: ${a.correct}`;
+review.appendChild(d);
+});
+}
+function goHome(){
+home.classList.remove("hidden");
+quizPanel.classList.add("hidden");
+resultPanel.classList.add("hidden");
+}
+function restartSame(){
+startQuiz(mode);
+}
+</script>
+</body>
+</html>
